@@ -13,7 +13,8 @@ app.engine("html", require("ejs").renderFile);
 //view 파일(html, ejs)에서 ref="style.css"라고 하면 public폴더 아래있는 style.css를 참조함
 //cdn을 사용하지 않을 경우 필수
 app.use(express.static(path.join(__dirname, "../fe/views", "public")));
-//app.use("/",functiont(req,res){....})와 같은 라우터 함수는 폴더를 별도로 만들어서 놔둔다.
+// redirect JS jQuery
+var modules = require("./module/install")(app);
 var router = require("./router/main")(app);
 app.listen(3000, function() {
   console.log("Express server has started on port 3000");
