@@ -3,9 +3,33 @@
   <head>
     <%include template/header.ejs %>
   </head>
+  <script>
+    $(document).ready(function() {
+      event1();
+      console.log("action!");
+    });
+    var event1 = function() {
+      console.log("event1 pressed");
+      $.ajax({
+        type: "post",
+        url:
+          "https://my.api.mockaroo.com/users.json?key=ee994130&__method=POST",
+        data: $("form").serialize(),
+        success: function(data) {
+          console.log(data);
+          $("#ground").append(data);
+        }
+      });
+    };
+  </script>
   <body>
     <p>
       helloworld
     </p>
+    <div id="time"></div>
+    <button id="execute" onclick="return event1()">
+      click!
+    </button>
+    <span id="ground"> </span>
   </body>
 </html>

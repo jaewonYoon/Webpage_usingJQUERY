@@ -6,5 +6,10 @@ module.exports = function(app) {
     "/js",
     express.static(path.join(__dirname, "../../../node_modules/jquery/dist"))
   );
+  app.use(
+    "/css",
+    express.static(path.join(__dirname, "../../../node_modules/bootstrap/dist"))
+  );
+
   //bootstrap css install
 };
