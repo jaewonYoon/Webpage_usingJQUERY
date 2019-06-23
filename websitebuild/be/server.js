@@ -11,15 +11,10 @@ app.set("views", path.join(__dirname, "../fe", "views"));
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
-//데이터베이스 설정
+//nodejs와 데이터베이스 설정 아이디와 비밀번호가 있다면 id:password@url:port
 mongoose.connect("mongodb://localhost:27017/wikiDB", {
   useNewUrlParser: true
 });
-const articleSchema = {
-  title: String,
-  content: String
-};
-const Article = mongoose.model("Article", articleSchema);
 
 //현 디렉토리 밑에 있는 public에서 css 파일을 참조한다.
 //view 파일(html, ejs)에서 ref="style.css"라고 하면 public폴더 아래있는 style.css를 참조함
@@ -27,7 +22,15 @@ const Article = mongoose.model("Article", articleSchema);
 app.use(express.static(path.join(__dirname, "../fe/views", "public")));
 // redirect JS jQuery
 var modules = require("./module/install")(app);
+//define each urls
 var router = require("./router/main")(app);
-app.listen(3000, function() {
-  console.log("Express server has started on port 3000");
+//rest api
+var restArticle = require("./router/restArticle")(app);
+var restVisitor = require("./router/restVisitor")(app);
+app.listen(3000, function(err, res) {
+  if (!err) console.log("Express server has started on port 3000");
+  else {
+    console.log("Server crashed");
+    res.redirect("/");
+  }
 });
