@@ -15,6 +15,7 @@ module.exports = function(app) {
     .get(function(req, res) {
       Article.find(function(err, foundArticles) {
         if (!err) {
+          console.log("error occurs");
           res.send(foundArticles);
         } else {
           res.send(err);
@@ -45,5 +46,43 @@ module.exports = function(app) {
           res.send(err);
         }
       });
+    });
+};
+
+/////Requests Targetting A Specific Article /////
+module.exports = function(app) {
+  app
+    .route("/articles/:articleTitle")
+
+    .get(function(req, res) {
+      //Use the found result.
+      Article.findOne({ title: req.params.articleTitle }, function(
+        err,
+        foundArticle
+      ) {
+        if (err) {
+          res.send(err);
+        }
+        if (foundArticle) {
+          res.send(foundArticle);
+        } else {
+          res.send("No articles found in Articles");
+        }
+      });
+    })
+
+    .put(function(req, res) {
+      console.log("put method is acdtivated");
+      Article.update(
+        { title: req.params.articleTitle },
+        { title: req.body.title, content: req.body.content },
+        function(err) {
+          if (!err) {
+            res.send("Successfully updated!");
+          } else {
+            res.send(err);
+          }
+        }
+      );
     });
 };

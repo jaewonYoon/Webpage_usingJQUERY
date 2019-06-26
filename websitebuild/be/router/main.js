@@ -6,4 +6,8 @@ module.exports = function(app) {
   app.get("/test", function(req, res) {
     res.render("test.ejs");
   });
+
+  app.get("/boot", function(req, res) {
+    res.render("boot.ejs");
+  });
 };

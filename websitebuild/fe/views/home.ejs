@@ -1,35 +1,27 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <%include template/header.ejs %>
-  </head>
-  <script>
-    $(document).ready(function() {
-      event1();
-      console.log("action!");
-    });
-    var event1 = function() {
-      console.log("event1 pressed");
-      $.ajax({
-        type: "post",
-        url:
-          "https://my.api.mockaroo.com/users.json?key=ee994130&__method=POST",
-        data: $("form").serialize(),
-        success: function(data) {
-          console.log(data);
-          $("#ground").append(data);
-        }
-      });
-    };
-  </script>
-  <body>
-    <p>
-      helloworld
-    </p>
-    <div id="time"></div>
-    <button id="execute" onclick="return event1()">
-      click!
-    </button>
-    <span id="ground"> </span>
-  </body>
+<head>
+<title>
+  layout building... 
+</title>
+<link rel="stylesheet" href="css/styles.css"/> 
+</head>
+<body>
+<div class="wrap">
+  <div class="app">
+      <div class="header">
+          <div class="flex-container">
+            <input type="text" class="header-input flex-item" placeholder="search"></input>
+            <div class="flex-item">social box</div>
+            <div class="flex-item">alert box</div>
+            <div class="flex-item">user box</div>
+          </div>
+      </div>
+      <div class="sidebar">
+          some sidebar
+      </div>
+      <div class="articles">some articles </div>
+  </div>
+</div>
+</body>
+
 </html>
